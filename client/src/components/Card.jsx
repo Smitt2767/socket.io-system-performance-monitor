@@ -2,6 +2,7 @@ import moment from "moment";
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import useTheme from "../hooks/useTheme";
 
 const getColor = (value) =>
   value <= 25
@@ -20,6 +21,10 @@ const bytesToSize = (bytes) => {
 };
 
 const Loader = ({ title, percent, children }) => {
+  const { theme } = useTheme();
+
+  const isDark = theme === "dark";
+
   return (
     <div className="flex flex-col p-2 items-center">
       <h3>{title}</h3>
@@ -32,8 +37,8 @@ const Loader = ({ title, percent, children }) => {
             textSize: "16px",
             pathTransitionDuration: 0.5,
             pathColor: getColor(percent),
-            textColor: "#fff",
-            trailColor: "rgb(55, 65, 81)",
+            textColor: isDark ? "#fff" : "#000",
+            trailColor: isDark ? "rgb(55, 65, 81)" : "#e5e7eb",
             backgroundColor: "transparent",
           })}
         />
@@ -69,13 +74,13 @@ const SystemInfo = ({
       </div>
       <div className="mb-3">
         <h3>Processor information</h3>
-        <p className="text-xs text-white mb-1">
+        <p className="text-xs dark:text-white mb-1">
           Type: <span className="text-gray-400">{cpuModel}</span>
         </p>
-        <p className="text-xs text-white mb-1">
+        <p className="text-xs dark:text-white mb-1">
           Number of Cors: <span className="text-gray-400">{cpuCors}</span>
         </p>
-        <p className="text-xs text-white mb-1">
+        <p className="text-xs dark:text-white mb-1">
           Clock Speed: <span className="text-gray-400">{cpuSpeed}</span>
         </p>
       </div>

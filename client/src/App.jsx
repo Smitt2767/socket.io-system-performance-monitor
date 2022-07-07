@@ -18,8 +18,6 @@ const App = () => {
     });
   }, [setData]);
 
-  console.log(data);
-
   return (
     <div className="app dark:bg-gray-900 bg-white">
       <Container className="pt-4">
